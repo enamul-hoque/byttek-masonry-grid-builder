@@ -29,9 +29,14 @@
     visibility: visible;
 }
 
+.bmgb_items {
+    margin: 0 -10px;
+}
+
 .bmgb_item {
     position: relative;
     width: 40%;
+    padding: 10px;
     z-index: 0;
 }
 
@@ -47,6 +52,7 @@
     right: 0;
     bottom: 0;
     height: 0%;
+    margin: 10px;
     background-color: rgba(21, 21, 21, .78);
     opacity: 0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
@@ -55,7 +61,7 @@
 }
 .bmgb_item:hover:before {
     top: 0;
-    height: 100%;
+    height: calc(100% - 20px);
     opacity: 1;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }

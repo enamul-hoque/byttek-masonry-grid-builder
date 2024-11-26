@@ -38,13 +38,13 @@ class Plugin {
 	}
 	
 	public function widget_styles() {
-		wp_register_style( 'bmgb-style', plugins_url( '/assets/css/style.css', __FILE__ ), [], '1.0.027' );
+		wp_register_style( 'bmgb-style', plugins_url( '/assets/css/style.css', __FILE__ ), [], '1.0.031' );
 	}
 
 	public function widget_scripts() {
 		wp_register_script( 'isotope', plugins_url( '/assets/js/isotope.pkgd.min.js', __FILE__ ), [ 'jquery' ], false, true );
 		wp_register_script( 'isotope-packery', plugins_url( '/assets/js/packery-mode.pkgd.min.js', __FILE__ ), [ 'jquery' ], false, true );
-		wp_register_script( 'bmgb-script', plugins_url( '/assets/js/bmgb.js', __FILE__ ), [ 'jquery', 'isotope', 'isotope-packery' ], '1.0.027', true );
+		wp_register_script( 'bmgb-script', plugins_url( '/assets/js/bmgb.js', __FILE__ ), [ 'jquery', 'isotope', 'isotope-packery' ], '1.0.031', true );
 	}
 
 	/**
