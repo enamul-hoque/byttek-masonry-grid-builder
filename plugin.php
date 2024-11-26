@@ -1,7 +1,5 @@
 <?php
-namespace ElementorHelloWorld;
-
-use ElementorHelloWorld\PageSettings\Page_Settings;
+namespace Byttek_MasonryGrid;
 
 /**
  * Class Plugin
@@ -38,57 +36,15 @@ class Plugin {
 		}
 		return self::$_instance;
 	}
+	
+	public function widget_styles() {
+		wp_register_style( 'bmgb-style', plugins_url( '/assets/css/style.css', __FILE__ ), [], '1.0.027' );
+	}
 
-	/**
-	 * widget_scripts
-	 *
-	 * Load required plugin core files.
-	 *
-	 * @since 1.2.0
-	 * @access public
-	 */
 	public function widget_scripts() {
-		wp_register_script( 'byttek-masonry-grid-builder', plugins_url( '/assets/js/hello-world.js', __FILE__ ), [ 'jquery' ], false, true );
-	}
-
-	/**
-	 * Editor scripts
-	 *
-	 * Enqueue plugin javascripts integrations for Elementor editor.
-	 *
-	 * @since 1.2.1
-	 * @access public
-	 */
-	public function editor_scripts() {
-		add_filter( 'script_loader_tag', [ $this, 'editor_scripts_as_a_module' ], 10, 2 );
-
-		wp_enqueue_script(
-			'byttek-masonry-grid-builder-editor',
-			plugins_url( '/assets/js/editor/editor.js', __FILE__ ),
-			[
-				'elementor-editor',
-			],
-			'1.2.1',
-			true
-		);
-	}
-
-	/**
-	 * Force load editor script as a module
-	 *
-	 * @since 1.2.1
-	 *
-	 * @param string $tag
-	 * @param string $handle
-	 *
-	 * @return string
-	 */
-	public function editor_scripts_as_a_module( $tag, $handle ) {
-		if ( 'byttek-masonry-grid-builder-editor' === $handle ) {
-			$tag = str_replace( '<script', '<script type="module"', $tag );
-		}
-
-		return $tag;
+		wp_register_script( 'isotope', plugins_url( '/assets/js/isotope.pkgd.min.js', __FILE__ ), [ 'jquery' ], false, true );
+		wp_register_script( 'isotope-packery', plugins_url( '/assets/js/packery-mode.pkgd.min.js', __FILE__ ), [ 'jquery' ], false, true );
+		wp_register_script( 'bmgb-script', plugins_url( '/assets/js/bmgb.js', __FILE__ ), [ 'jquery', 'isotope', 'isotope-packery' ], '1.0.027', true );
 	}
 
 	/**
@@ -103,25 +59,10 @@ class Plugin {
 	 */
 	public function register_widgets( $widgets_manager ) {
 		// Its is now safe to include Widgets files
-		require_once( __DIR__ . '/widgets/hello-world.php' );
-		require_once( __DIR__ . '/widgets/inline-editing.php' );
+		require_once( __DIR__ . '/widgets/byttek-masonry-grid.php' );
 
 		// Register Widgets
-		$widgets_manager->register( new Widgets\Hello_World() );
-		$widgets_manager->register( new Widgets\Inline_Editing() );
-	}
-
-	/**
-	 * Add page settings controls
-	 *
-	 * Register new settings for a document page settings.
-	 *
-	 * @since 1.2.1
-	 * @access private
-	 */
-	private function add_page_settings_controls() {
-		require_once( __DIR__ . '/page-settings/manager.php' );
-		new Page_Settings();
+		$widgets_manager->register( new Widgets\Byttek_Masonry_Grid() );
 	}
 
 	/**
@@ -133,17 +74,14 @@ class Plugin {
 	 * @access public
 	 */
 	public function __construct() {
+		// Register widget styles
+		add_action( 'elementor/frontend/after_register_styles', [ $this, 'widget_styles' ] );
 
 		// Register widget scripts
 		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'widget_scripts' ] );
 
 		// Register widgets
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
-
-		// Register editor scripts
-		add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'editor_scripts' ] );
-		
-		$this->add_page_settings_controls();
 	}
 }
 

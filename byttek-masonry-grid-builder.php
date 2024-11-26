@@ -40,7 +40,7 @@ final class Elementor_BMGB {
 	 * @since 1.2.1
 	 * @var string The plugin version.
 	 */
-	const VERSION = '1.2.1';
+	const VERSION = '1.0';
 
 	/**
 	 * Minimum Elementor Version

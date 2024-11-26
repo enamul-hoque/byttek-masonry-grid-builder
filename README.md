@@ -8,7 +8,7 @@ assets/
       /css  Holds plugin CSS Files
       
 widgets/
-      /hello-world.php
+      /byttek-masonry-grid.php
       /inline-editing.php
       
 index.php
@@ -21,7 +21,7 @@ plugin.php
   * `/js` directory - Holds plugin Javascript Files
   * `/css` directory - Holds plugin CSS Files
 * `widgets` directory - Holds Plugin widgets
-  * `/hello-world.php` - Hello World demo Widget class
+  * `/byttek-masonry-grid.php` - Hello World demo Widget class
   * `/inline-editing.php` - Inline Editing demo Widget class
 * `index.php`	- Prevent direct access to directories
 * `byttek-masonry-grid-builder.php`	- Main plugin file, used as a loader if plugin minimum requirements are met.
