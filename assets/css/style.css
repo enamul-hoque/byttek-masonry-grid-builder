@@ -100,3 +100,10 @@
     right: 0;
     bottom: 0;
 }
+
+@media screen and (max-width: 768px) {
+    .bmgb_item,
+    .bmgb_item:nth-child(3n) {
+        width: 100%;
+    }
+}
